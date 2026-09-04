@@ -5,25 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "families")
-public class Family {
+@Table(name = "person_photos")
+public class PersonPhoto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
-    @ManyToMany(mappedBy = "families")
-    private Set<User> users;
+    @ManyToOne
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person person;
 
-    @OneToMany(mappedBy = "family")
-    private Set<Person> persons = new HashSet<>();;
+    @Column(name = "file_url")
+    private String fileUrl;
+
 }
